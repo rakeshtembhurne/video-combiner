@@ -2,35 +2,61 @@
 
 A fast CLI tool to combine videos and add logo overlays. Built with Bun + FFmpeg.
 
-## Installation
-
-```bash
-# Install globally with bun
-bun install -g video-combiner
-
-# Or use with npx
-bunx video-combiner --help
-```
-
 ## Requirements
 
 - [Bun](https://bun.sh) >= 1.0.0
 - [FFmpeg](https://ffmpeg.org) (must be in PATH)
 
-## Usage
+## Installation
+
+### Option 1: Clone and run locally
 
 ```bash
-video-combiner <command> [options]
+git clone https://github.com/rakeshtembhurne/video-combiner.git
+cd video-combiner
+bun install
 ```
 
-### Commands
+### Option 2: Install from GitHub
+
+```bash
+bun install github:rakeshtembhurne/video-combiner
+```
+
+## Usage
+
+### Run directly
+
+```bash
+bun run src/cli.ts --help
+```
+
+### Combine videos
+
+```bash
+bun run src/cli.ts combine video1.mp4 video2.mp4 -o output.mp4
+```
+
+### Add a logo watermark
+
+```bash
+bun run src/cli.ts combine video1.mp4 video2.mp4 -l logo.png -o branded.mp4
+```
+
+### Get video info
+
+```bash
+bun run src/cli.ts info video.mp4
+```
+
+## Commands
 
 | Command | Description |
 |---------|-------------|
 | `combine` | Combine multiple videos into one |
 | `info` | Show video metadata |
 
-### Combine Options
+## Combine Options
 
 ```
 -o, --output <file>     Output file (default: combined.mp4)
@@ -43,7 +69,7 @@ video-combiner <command> [options]
 -v, --verbose           Show detailed progress
 ```
 
-### Logo Positions
+## Logo Positions
 
 - `top-left`
 - `top-right`
@@ -51,7 +77,7 @@ video-combiner <command> [options]
 - `bottom-right` (default)
 - `center`
 
-### Quality Presets
+## Quality Presets
 
 | Level | CRF | Preset | Use Case |
 |-------|-----|--------|----------|
@@ -62,53 +88,34 @@ video-combiner <command> [options]
 
 ## Examples
 
-### Combine two videos
-
 ```bash
-video-combiner combine intro.mp4 outro.mp4 -o final.mp4
-```
+# Combine two videos
+bun run src/cli.ts combine intro.mp4 outro.mp4 -o final.mp4
 
-### Combine all MP4 files in a directory
+# Combine with logo in bottom-right (default)
+bun run src/cli.ts combine v1.mp4 v2.mp4 -l logo.png -o branded.mp4
 
-```bash
-video-combiner combine *.mp4 -o combined.mp4
-```
+# Centered logo at 50% size
+bun run src/cli.ts combine v1.mp4 v2.mp4 -l logo.png -p center -s 50 -o output.mp4
 
-### Add a logo watermark
+# High quality with verbose output
+bun run src/cli.ts combine v1.mp4 v2.mp4 -l logo.png -q lossless -v -o final.mp4
 
-```bash
-video-combiner combine v1.mp4 v2.mp4 -l logo.png -o branded.mp4
-```
-
-### Centered logo with custom size
-
-```bash
-video-combiner combine *.mp4 -l logo.png -p center -s 50 -o output.mp4
-```
-
-### High quality with verbose output
-
-```bash
-video-combiner combine v1.mp4 v2.mp4 -l logo.png -q lossless -v -o final.mp4
-```
-
-### Get video info
-
-```bash
-video-combiner info video.mp4
+# Combine multiple videos
+bun run src/cli.ts combine part1.mp4 part2.mp4 part3.mp4 part4.mp4 -o full.mp4
 ```
 
 ## Development
 
 ```bash
 # Clone the repo
-git clone https://github.com/rakeshtembhurne/video-combiner
+git clone https://github.com/rakeshtembhurne/video-combiner.git
 cd video-combiner
 
 # Install dependencies
 bun install
 
-# Run in dev mode
+# Run CLI
 bun run src/cli.ts --help
 
 # Build for production
