@@ -119,16 +119,27 @@ export async function addLogoOverlay(
     'center': `(W-w)/2:(H-h)/2`,
   };
 
+  // Build filter_complex
+  // scale is percentage: 100 means no scaling, 50 means half size
+  let filterComplex: string;
+  if (scale === 100) {
+    // No scaling needed, just overlay
+    filterComplex = `[0:v][1:v]overlay=${positionExpr[position]}[out]`;
+  } else {
+    // Scale logo by percentage, then overlay
+    const scaleFactor = scale / 100;
+    filterComplex = `[1:v]scale=iw*${scaleFactor}:-1[logo];[0:v][logo]overlay=${positionExpr[position]}[out]`;
+  }
+
+  const crfStr = quality.crf.toString();
+
   if (verbose) {
     console.log(`🎬 Adding logo overlay...`);
     console.log(`   Position: ${position}`);
     console.log(`   Scale: ${scale}%`);
     console.log(`   Quality: CRF ${quality.crf}, preset ${quality.preset}`);
+    console.log(`   Filter: ${filterComplex}`);
   }
-
-  // Use Bun's shell with proper escaping
-  const filterComplex = `[1:v]scale=${scale}:-1[logo];[0:v][logo]overlay=${positionExpr[position]}[out]`;
-  const crfStr = quality.crf.toString();
 
   if (verbose) {
     await $`ffmpeg -y -i ${input} -i ${logoPath} -filter_complex ${filterComplex} -map [out] -map 0:a -c:v libx264 -crf ${crfStr} -preset ${quality.preset} -c:a aac -b:a 192k ${outputPath}`;
