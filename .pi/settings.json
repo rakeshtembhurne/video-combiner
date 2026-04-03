@@ -1,0 +1,13 @@
+{
+  "$schema": "https://pi.dev/schemas/settings.json",
+  "defaultThinkingLevel": "medium",
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 16384,
+    "keepRecentTokens": 20000
+  },
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3
+  }
+}
