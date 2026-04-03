@@ -28,6 +28,10 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
-  }
+    "url": "git+https://github.com/rakeshtembhurne/video-combiner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rakeshtembhurne/video-combiner/issues"
+  },
+  "homepage": "https://github.com/rakeshtembhurne/video-combiner#readme"
 }

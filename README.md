@@ -102,7 +102,7 @@ video-combiner info video.mp4
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourname/video-combiner
+git clone https://github.com/rakeshtembhurne/video-combiner
 cd video-combiner
 
 # Install dependencies
