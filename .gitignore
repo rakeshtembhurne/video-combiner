@@ -24,3 +24,5 @@ Thumbs.db
 
 # Test outputs
 test_*.mp4
+*.mp4
+!.gitkeep
