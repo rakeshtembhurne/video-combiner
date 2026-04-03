@@ -1,0 +1,33 @@
+{
+  "name": "video-combiner",
+  "version": "1.0.0",
+  "description": "CLI tool to combine videos and add logo overlays using FFmpeg",
+  "type": "module",
+  "main": "src/cli.ts",
+  "bin": {
+    "video-combiner": "./src/cli.ts"
+  },
+  "files": ["src"],
+  "scripts": {
+    "dev": "bun run src/cli.ts",
+    "build": "bun build ./src/cli.ts --outdir ./dist --target bun --minify",
+    "build:node": "bun build ./src/cli.ts --outdir ./dist-node --target node --minify",
+    "start": "bun run src/cli.ts"
+  },
+  "keywords": ["video", "ffmpeg", "combine", "concatenate", "logo", "watermark", "cli", "bun"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
